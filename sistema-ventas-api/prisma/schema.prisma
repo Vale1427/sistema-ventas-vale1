@@ -1,0 +1,33 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://admin:vale1234@sistema-ventas-bdvale.c3ywamkemedu.us-east-2.rds.amazonaws.com:3306/sistema_ventas_bdWor"
+}
+
+model Rol {
+  cveRol Int @id @default(autoincrement())
+  descripcion String @db.VarChar(250)
+  clave String @db.VarChar(45)
+  activo Boolean @db.TinyInt()
+
+  Usuario Usuario[]
+
+  @@map("Rol")
+}
+
+model Usuario {
+  cveUsuario Int @id @default(autoincrement())
+  nombre String @db.VarChar(250)
+  apellidos String @db.VarChar(600)
+  username String @db.VarChar(150)
+  password String @db.VarChar(800)
+  fechaRegistro DateTime @default(now())
+  rol Rol @relation(fields: [cveRol], references: [cveRol])
+  cveRol Int
+
+  @@map("Usuario")
+}
