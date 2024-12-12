@@ -1,12 +1,28 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://admin:vale1234@sistema-ventas-bdvale.c3ywamkemedu.us-east-2.rds.amazonaws.com:3306/sistema_ventas_bdWor"
-}
+  url      = "mysql://root:1234@yvcVentas:3306/yv_ventas_db"
+}//mysql://admin:vale1234@sistema-ventas-bdvale.c3ywamkemedu.us-east-2.rds.amazonaws.com:3306/sistema_ventas_bdWor
+//docker run -d --name mariadbVentas -p 3310:3306 -e 
+//MARIADB_ROOT_PASSWORD=1234 -e MARIADB_DATABASE=sistema-ventas-bdvale --
+//network yvcVentas mariadb:11.5
+
+// docker run -d \
+  //--name mariadbVentas 
+ // -p 3310:3306 
+ // -e MARIADB_ROOT_PASSWORD=1234 
+ // -e MARIADB_DATABASE=sistema-ventas-bdvale  
+ // -e MARIADB_USER=admin 
+ // -e MARIADB_PASSWORD=vale1234 
+ // --network yvcVentas 
+ // mariadb:11.5 */
+
+
 
 model Rol {
   cveRol Int @id @default(autoincrement())

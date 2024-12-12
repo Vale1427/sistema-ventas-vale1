@@ -1,0 +1,37 @@
+services:
+  mariadbVentas:
+    container_name: mariadbVentas
+    image: mariadb:11.5
+    ports:
+      - "3310:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: yv_ventas_db
+    networks:
+      - yvcVentas
+    volumes:
+      - data-mariadb2:/var/lib/mysql
+    restart: always
+ 
+  modulo-ventasback3:
+    container_name: modulo-ventasback3
+    #image: usuarios:latest
+    build:
+      context: ./sistema-ventas-api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - yvcVentas
+    depends_on:
+      - mariadbVentas
+    restart: always
+
+volumes:
+  data-mariadb2:
+    name: data-mariadb2
+  data-postgres:
+    name: data-postgres
+
+networks:
+  yvcVentas:
